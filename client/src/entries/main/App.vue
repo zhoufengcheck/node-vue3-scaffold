@@ -21,7 +21,6 @@ export default {
     paramData.append('name','nice');
     paramData.append('age','100')
     let data = await this.$axios.post('/api/user',paramData);
-    console.log(data)
   },
   methods: {
     toHome(){

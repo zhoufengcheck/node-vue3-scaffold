@@ -17,12 +17,14 @@ export default {
   },
   methods: {
     async submit(){
-        console.log(1)
         let result = await this.$axios.post('/login',{
             name: this.name,
             password: this.password
         })
         console.log(result)
+        if(result.status) {
+          window.location = `http://${window.location.host}/index.html`
+        }
     }
   }
 }

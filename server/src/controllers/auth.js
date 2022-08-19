@@ -20,7 +20,8 @@ class Auth {
         }
     }
     logout(req, res) {
-
+        req.session.destroy();
+        res.redirect('/login.html')
     }
 }
 export default new Auth()

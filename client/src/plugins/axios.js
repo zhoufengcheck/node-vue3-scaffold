@@ -47,7 +47,7 @@ _axios.interceptors.response.use(
     const status = error.response.status;
     if (status == 401) {
       //跳转到登录页面
-      // window.location = "xxx.com/login"
+      window.location = `http://${window.location.host}/login.html`
     } else if (status == 403) {
       console.log('没有权限')
     } else if (status != 200) {
