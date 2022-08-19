@@ -35,11 +35,10 @@ export default {
     }
   },
   beforeCreate(){
-    // console.log('beforeCreate',this.name)
   },
   methods: {
     fun(){
-      console.log(11)
+
     }
   },
 

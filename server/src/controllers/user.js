@@ -1,22 +1,36 @@
+import UserService from '../services/user.js';
+import {setRedis, getRedis} from '../utils/redis.js';
+import { uid } from 'uid'
+import schedule from 'node-schedule';
 class User {
     constructor(){
+        // schedule.scheduleJob('*/5 * * * *', async ()=>{
+        //     let uidRandom = uid(32);
+        //     let data = await getRedis('dd');
+        //     if (data) {
+        //         return;
+        //     } else {
+        //         let result = await setRedis('dd', uidRandom, {
+        //             options:{
+        //                 PX: 5*60*1000 - 5000,
+        //                 NX: true
+        //             }
+        //         });
+        //         setTimeout(()=>{
+        //             if(result === uidRandom) {
+        //                 //do something...
+        //                 console.log(new Date(),'执行定时任务')
+        //             }
+        //         },1000)
+        //     }
+        // });
     }
-    async getList(req, res){
-        console.log(111)
-        await new Promise((res,rej)=>{
-            setTimeout(()=>{
-                res(1)
-            },2000)
-        })
+    async getAllUserList(req, res){
+        console.log(req.body)
+        let list = await UserService.findData({})
         res.send({
             status:true,
-            name:'1212'
-        })
-    }
-    deleteUser(req,res) {
-        res.status(200).send({
-            status:true,
-            
+            data:list
         })
     }
 }
