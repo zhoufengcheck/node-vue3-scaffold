@@ -35,7 +35,7 @@ app.use(session({
     saveUninitialized:false,
     cookie:{
       httpOnly: true,
-      maxAge: 1000*60*5 
+      maxAge: 1000*60*60*24 
     }
 }));
 
@@ -65,6 +65,12 @@ app.use('/api',(req,res,next)=>{
 }, router)
 app.use('/', auth);
 
+app.use(function(err, req, res, next) {
+    res.status(500).send({
+        error: err.stack,
+        status: false,
+    });
+});
 
 
 export default app
