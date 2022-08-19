@@ -1,9 +1,12 @@
 import UserService from '../services/user.js';
-import {setRedis, getRedis} from '../utils/redis.js';
+import normalLog from '../utils/normalLog.js'
+// import {setRedis, getRedis} from '../utils/redis.js';
 import { uid } from 'uid'
 import schedule from 'node-schedule';
+
 class User {
     constructor(){
+        normalLog({nam:1})
         // schedule.scheduleJob('*/5 * * * *', async ()=>{
         //     let uidRandom = uid(32);
         //     let data = await getRedis('dd');
@@ -26,7 +29,6 @@ class User {
         // });
     }
     async getAllUserList(req, res){
-        console.log(req.body)
         let list = await UserService.findData({})
         res.send({
             status:true,

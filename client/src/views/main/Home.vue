@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import HelloWorld from '../components/HelloWorld.vue'
+import HelloWorld from '../../components/HelloWorld.vue'
 import { computed } from 'vue'
 export default {
   name: 'HomeCom',
