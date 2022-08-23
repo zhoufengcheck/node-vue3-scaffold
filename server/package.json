@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "nodemon": "nodemon --inspect=9117 --watch '**/*' -e js,json ./src/server.js"
+    "nodemon": "nodemon --inspect=9117 --watch '**/*' -e js,json ./src/server.js",
+    "start":"pm2 start ./src/server.js -i max"
   },
   "author": "",
   "license": "ISC",

@@ -3,21 +3,19 @@
     Home
     <hello-world ref="hello">
       <template v-slot:header="scope">
-        <h1>
-          {{scope}}
-          Here might be a page title
+        <h1 v-access="{access: ['super1Admin']}">
+          {{name}}{{scope}}
         </h1>
+        <h2 v-access="{access: ['11','22']}">jjj</h2>
       </template>
     </hello-world>
-    <div class="outer">
-      <div class="inner">123123123</div>
-      <div class="inner">123123123</div>
-    </div>
+    {{count}}
   </div>
 </template>
 <script>
 import HelloWorld from '../../components/HelloWorld.vue'
-import { computed } from 'vue'
+import { computed } from 'vue';
+import {mapState} from 'vuex';
 export default {
   name: 'HomeCom',
   data(){
@@ -25,6 +23,9 @@ export default {
       name: '1',
       todos: []
     }
+  },
+  computed: {
+    ...mapState('home', ['count'])
   },
   components: {
     HelloWorld
@@ -34,7 +35,14 @@ export default {
       todoLength: computed(() => this.todos.length)
     }
   },
-  beforeCreate(){
+  created(){
+
+  },
+  mounted(){
+    console.log(bbb)
+    setTimeout(()=>{
+      this.name = 100
+    },2000)
   },
   methods: {
     fun(){

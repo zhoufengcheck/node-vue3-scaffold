@@ -3,7 +3,6 @@ const List = ()=>import('../../views/main/List.vue');
 const Detail = ()=>import('../../views/main/Detail.vue')
 const Home = ()=>import('../../views/main/Home.vue')
 const routes = [
-    // { path: '/', component: Home },
     { 
         path: '/home', component: Home,
         meta: {
