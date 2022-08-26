@@ -39,7 +39,6 @@ export default {
 
   },
   mounted(){
-    console.log(bbb)
     setTimeout(()=>{
       this.name = 100
     },2000)
@@ -53,25 +52,25 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  
-}
-.outer {
-  height: 400px;
-  width: 400px;
-  border: 1px solid red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.inner {
-  border: 1px solid red;
-}
+<style lang="scss">
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+    
+  }
+  .outer {
+    height: 400px;
+    width: 400px;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .inner {
+    border: 1px solid red;
+  }
 </style>

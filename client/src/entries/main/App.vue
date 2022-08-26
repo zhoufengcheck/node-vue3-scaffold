@@ -17,11 +17,11 @@
 export default {
   name: 'App',
   async created(){
-    let paramData = new FormData();
-    paramData.append('name','nice');
-    paramData.append('age','100')
-    // let data = await this.$axios.post('/api/user',paramData);
-    // console.log(data)
+    // let paramData = new FormData();
+    // paramData.append('name','nice');
+    // paramData.append('age','100')
+    let data = await this.$axios.post('/api/user',{});
+    console.log(data)
     
   },
   methods: {

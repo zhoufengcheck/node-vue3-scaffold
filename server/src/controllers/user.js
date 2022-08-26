@@ -28,6 +28,7 @@ class User {
         });
     }
     async getAllUserList(req, res){
+        console.log(11)
         let list = await UserService.findData({})
         res.send({
             status:true,
@@ -35,5 +36,6 @@ class User {
         })
     }
 }
+
 
 export default new User()
