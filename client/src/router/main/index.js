@@ -16,4 +16,10 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes, // `routes: routes` 的缩写
 })
+router.beforeEach((to, from, next) => {
+    // ...
+    next()
+})
+
+
 export default router

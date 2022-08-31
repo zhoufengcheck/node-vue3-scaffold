@@ -4,6 +4,7 @@
     <el-button @click="toHome">home</el-button>
     <el-button @click="toDetail">detail</el-button>
     <el-button @click="toList">list</el-button>
+    <router-link to="/home">xxx</router-link>
     <router-view v-slot="{ Component }">
       <keep-alive>
         <component :is="Component" v-if="$route.meta.keepAlive" />
@@ -17,12 +18,8 @@
 export default {
   name: 'App',
   async created(){
-    // let paramData = new FormData();
-    // paramData.append('name','nice');
-    // paramData.append('age','100')
-    let data = await this.$axios.post('/api/user',{});
-    console.log(data)
-    
+    let data = await this.$axios.post('/api/user');
+    console.log(data) 
   },
   methods: {
     toHome(){

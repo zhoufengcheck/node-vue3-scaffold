@@ -15,7 +15,6 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, '../../client/dist')))
 
 const redisClient = redis.createClient({url:"redis://127.0.0.1:6379",legacyMode: true});
 redisClient.connect();
@@ -56,7 +55,6 @@ db.on('close',()=>{
 })
 
 app.use('/api',(req,res,next)=>{
-    console.log(req.session)
     if (!req.session || !req.session.user) {
         return res.status(401).send({
           status: false
@@ -65,6 +63,26 @@ app.use('/api',(req,res,next)=>{
     next()
 }, router)
 app.use('/', auth);
+
+const sleepFun = time => {
+  return new Promise(res => {
+    setTimeout(() => {
+      res()
+    }, time)
+  })
+}
+const filter = (req, res, next) => {
+  const { sleep } = req.query || 0
+  if (sleep) {
+    sleepFun(sleep).then(() => next())
+  } else {
+    next()
+  }
+}
+
+app.use('/static',filter, express.static(path.join(__dirname,'../../client/dist/static/')))
+app.use(express.static(path.join(__dirname, '../../client/dist')))
+
 
 app.use(function(err, req, res, next) {
     res.status(500).send({

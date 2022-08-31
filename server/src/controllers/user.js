@@ -28,14 +28,15 @@ class User {
         });
     }
     async getAllUserList(req, res){
-        console.log(11)
         let list = await UserService.findData({})
+        // res.set('Cache-control', 'max-age=10000')
         res.send({
             status:true,
-            data:list
+            data:list,
+            a:1
         })
     }
 }
-
+//W/"20a-9wBiW4cYQJ9eR0uKm9xm+JKS+eM
 
 export default new User()

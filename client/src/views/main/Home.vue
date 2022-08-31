@@ -1,19 +1,13 @@
 <template>
-  <div>
+  <div class="red">
     Home
-    <hello-world ref="hello">
-      <template v-slot:header="scope">
-        <h1 v-access="{access: ['super1Admin']}">
-          {{name}}{{scope}}
-        </h1>
-        <h2 v-access="{access: ['11','22']}">jjj</h2>
-      </template>
-    </hello-world>
-    {{count}}
+    {{name}}
+    <InputBox v-model="name"></InputBox>
   </div>
 </template>
 <script>
-import HelloWorld from '../../components/HelloWorld.vue'
+import HelloWorld from '../../components/HelloWorld.vue';
+import InputBox from '../../components/InputBox.vue'
 import { computed } from 'vue';
 import {mapState} from 'vuex';
 export default {
@@ -22,13 +16,15 @@ export default {
     return {
       name: '1',
       todos: []
+      
     }
   },
   computed: {
     ...mapState('home', ['count'])
   },
   components: {
-    HelloWorld
+    HelloWorld,
+    InputBox
   },
   provide() {
     return {
@@ -39,9 +35,7 @@ export default {
 
   },
   mounted(){
-    setTimeout(()=>{
-      this.name = 100
-    },2000)
+  
   },
   methods: {
     fun(){

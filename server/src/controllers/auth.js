@@ -4,7 +4,6 @@ class Auth {
     }
     login(req, res) {
         let body = req.body;
-        console.log(body)
         if (body.name == "nice" && body.password=="123"){
             req.session.user = {
                 name:'nice'
