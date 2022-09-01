@@ -22,12 +22,12 @@ export default {
         this.name = this.modelValue;
     },
     watch: {
-        name: function(newVal, oldVal){
-            this.$emit('change', newVal)
-        },
-        modelValue:function(newVal,oldVal){
-            this.name = newVal;
-        }
+        // name: function(newVal, oldVal){
+        //     this.$emit('change', newVal)
+        // },
+        // modelValue:function(newVal,oldVal){
+        //     this.name = newVal;
+        // }
     }
 }
 </script>

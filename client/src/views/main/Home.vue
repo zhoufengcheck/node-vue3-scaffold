@@ -1,13 +1,26 @@
 <template>
   <div class="red">
     Home
-    {{name}}
-    <InputBox v-model="name"></InputBox>
+    <Tree :treeNodeList="treeList"></Tree>
   </div>
 </template>
 <script>
-import HelloWorld from '../../components/HelloWorld.vue';
-import InputBox from '../../components/InputBox.vue'
+function dealTreeList(treeList,parentId='') {
+  treeList.forEach((item,index) => {
+    item.id = index;
+    if (parentId !== '') {
+      item.parentId = `${parentId}-${index}`;
+    } else {
+      item.parentId = ''
+    }
+    if(item.children) {
+      dealTreeList(item.children, item.parentId || index)
+    }
+  });
+  return treeList
+}
+
+import Tree from '../../components/Tree.vue'
 import { computed } from 'vue';
 import {mapState} from 'vuex';
 export default {
@@ -15,16 +28,63 @@ export default {
   data(){
     return {
       name: '1',
-      todos: []
-      
+      checked:false,
+      treeList:dealTreeList([
+        {
+          name:'1',
+          checked:false,
+          indeterminate:false,
+          children:[{
+            name:'1-1',
+            checked:false,
+            indeterminate:false,
+            children:[{
+              name:'1-1-1',
+              checked:false,
+              indeterminate:false,
+            },{
+              name:'1-1-2',
+              checked:false,
+              indeterminate:false,
+            }]
+          },
+          {
+            name:'1-2',
+            checked:false,
+            indeterminate:false,
+            children:[{
+              name:'1-2-1',
+              checked:false,
+              indeterminate:false,
+            },{
+              name:'1-2-2',
+              checked:false,
+              indeterminate:false,
+            }]
+          }]
+        },{
+          name:'2',
+          checked:false,
+          indeterminate:false,
+          children:[{
+            name:'2-1',
+            checked:false,
+            indeterminate:false,
+            children:[{
+              name:'2-1-1',
+              checked:false,
+              indeterminate:false,
+            }]
+          }]
+        }
+      ])
     }
   },
   computed: {
     ...mapState('home', ['count'])
   },
   components: {
-    HelloWorld,
-    InputBox
+    Tree
   },
   provide() {
     return {

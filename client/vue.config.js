@@ -1,4 +1,4 @@
-let { defineConfig } = require('@vue/cli-service')
+let { defineConfig } = require('@vue/cli-service');
 const AutoImport = require('unplugin-auto-import/webpack')
 const Components = require('unplugin-vue-components/webpack')
 const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
@@ -15,7 +15,11 @@ module.exports = defineConfig({
       Components({
         resolvers: [ElementPlusResolver()],
       }),
-    ]
+    ],
+    resolve: {
+      extensions: ['.ts', '.js', '.vue', '.json', '.mjs','css'],
+      // ...
+    }     
   },
   pages: {
     //配置展开写法

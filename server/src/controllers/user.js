@@ -28,7 +28,12 @@ class User {
         });
     }
     async getAllUserList(req, res){
-        let list = await UserService.findData({})
+        let list = await UserService.findData({
+            
+            $where: function(){
+                return this.user_name == 'zhou1feng'
+            }
+        })
         // res.set('Cache-control', 'max-age=10000')
         res.send({
             status:true,
