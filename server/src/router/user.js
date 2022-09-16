@@ -6,7 +6,7 @@ const upload = multer({ dest: './files' })
 let router = express.Router();
 
 router.post('/', upload.single(), handlerError(UserControl.getAllUserList.bind(UserControl)));
-router.get('/', upload.single(), handlerError(UserControl.getAllUserList.bind(UserControl)));
+router.get('/', upload.single(), handlerError(UserControl.getData.bind(UserControl)));
 
 
 export default router;

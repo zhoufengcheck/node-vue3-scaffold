@@ -28,16 +28,39 @@ class User {
         });
     }
     async getAllUserList(req, res){
+        console.log(req.data)
         let list = await UserService.findData({
-            
             $where: function(){
                 return this.user_name == 'zhou1feng'
             }
+        })
+        await new Promise((res,rej)=>{
+            setTimeout(()=>{
+                res(1)
+            },3000)
         })
         // res.set('Cache-control', 'max-age=10000')
         res.send({
             status:true,
             data:list,
+            a:1
+        })
+    }
+    async getAllUserList(req, res){
+        let list = await UserService.findData({
+            $where: function(){
+                return this.user_name == 'zhou1feng'
+            }
+        })
+        res.send({
+            status:true,
+            data:list,
+            a:1
+        })
+    }
+    async getData(req,res) {
+        res.send({
+            status:true,
             a:1
         })
     }

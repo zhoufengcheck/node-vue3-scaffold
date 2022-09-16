@@ -7,7 +7,7 @@ window.pendings = []; // 声明一个数组用于存储每个请求的取消函�
 const removePending = (config) => {
   for (const p in window.pendings) {
     // 当当前请求在数组中存在时执行函数体
-    if (window.pendings[p].url === `${config.url.split('?')[0]}&${JSON.stringify(config.data)}${config.method}`) {
+    if (window.pendings[p].url === `${config.url[0]}&${JSON.stringify(config.data)}${config.method}`) {
       window.pendings[p].controller.abort(); // 执行取消操作
       window.pendings.splice(p, 1); // 数组移除当前请求
     }
@@ -23,7 +23,7 @@ _axios.interceptors.request.use(
     const controller = new AbortController();
     config.signal = controller.signal;
     window.pendings.push({
-      url: `${config.url.split('?')[0]}&${JSON.stringify(config.data)}${config.method}`,
+      url: `${config.url}&${JSON.stringify(config.data)}${config.method}`,
       controller
     })
     return config;

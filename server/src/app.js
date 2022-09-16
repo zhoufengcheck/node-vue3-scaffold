@@ -56,6 +56,7 @@ db.on('close',()=>{
 
 app.use('/api',(req,res,next)=>{
     if (!req.session || !req.session.user) {
+        console.log(req.get('Referer'))
         return res.status(401).send({
           status: false
         })

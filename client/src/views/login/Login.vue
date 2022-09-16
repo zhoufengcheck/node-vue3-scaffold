@@ -18,8 +18,8 @@ export default {
   methods: {
     async submit(){
         let result = await this.$axios.post('/login',{
-            name: this.name,
-            password: this.password
+          name: this.name,
+          password: this.password
         })
         console.log(result)
         if(result.status) {

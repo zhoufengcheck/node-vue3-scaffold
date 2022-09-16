@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+	div,p,li,ul{padding: 0;margin: 0}
+	.outer{
+		width: 300px;
+		height: 500px;
+		border: 1px solid #ccc;
+		position: relative;
+		overflow: auto;
+	}
+	.inner_scroll{
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		z-index: 10;
+		height: 10000px;
+	}
+	.inner{
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 10;
+	}
+	.inner p{
+		width: 100%;
+		word-break:break-all;      
+		word-wrap:break-word; 
+	}
+  </style>
+</head>
+<body>
+	<button id="button">button</button><br>
+	<div class="outer" id="outer">
+		<div class="inner_scroll" id="inner_scroll"></div>
+		<div class="inner" id="inner">
+		</div>
+	</div>
+</body>
+<script>
+	let data_list = [];
+	let posiont_list = [];
+	let item_height = 100;
+	let total_height = 500;
+	let item_num = parseInt(total_height/item_height)+6;
+	let total_num = 50;
+	let bengin_num = 0
+	let end_num = bengin_num+item_num;
+	let inner = null
+	let outer = null;
+	let inner_scroll = null;
+	let last_begin_num = bengin_num
+
+	window.onload = function(){
+		ininData()
+		inner = document.getElementById('inner');
+		outer = document.getElementById('outer');
+		inner_scroll = document.getElementById('inner_scroll');
+		inner_scroll.style = `height: ${posiont_list[posiont_list.length-1].bottom}px`
+		renderData();
+
+		outer.onscroll = ()=>{
+			let scrollTop = outer.scrollTop;
+
+			//此时的开始索引
+			bengin_num = searchStartIndex(posiont_list,scrollTop);
+	
+			if(bengin_num !=last_begin_num ){
+				last_begin_num = bengin_num;
+				//此时的结束索引
+				end_num = bengin_num + item_num;
+				if(end_num>total_num){
+					end_num = total_num;
+					bengin_num = total_num - item_num
+				}
+				if(total_num-end_num < item_num){
+					end_num = total_num
+				}
+				renderData()
+			}
+		}
+
+		
+		
+	}
+	
+	//寻找begin_num;找那个bottom刚好比scrollTop大的。
+	//刚好
+    function searchStartIndex(list,value){
+      let start = 0;
+      let end = list.length - 1;
+      let tempIndex = null;
+
+      while(start <= end){
+        let midIndex = parseInt((start + end)/2);
+        let midValue = list[midIndex].bottom;
+        if(midValue === value){
+          return midIndex + 1;
+        }else if(midValue < value){
+          start = midIndex + 1;
+        }else if(midValue > value){
+          if(tempIndex === null || tempIndex > midIndex){
+            tempIndex = midIndex;
+          }
+          end = end - 1;
+        }
+      }
+      return tempIndex;
+    }
+
+	function ininData (){
+		for(let i = 0;i<=total_num;i++){
+			data_list.push("a".repeat(parseInt(Math.random()*300)))
+			posiont_list.push({
+				index:i,
+				height:100,
+				top:i * 100,
+				bottom:(i+1) * 100
+			})
+		}
+	}
+	function renderData(){
+	
+		let inner = document.getElementById('inner');
+		// 将数据插入容器中
+		let str = ""
+		for (let i = bengin_num; i <= end_num; i++) {
+			str += `<p class="inner-item" id=${i}>${i} ${data_list[i]}</p>`	
+		}
+		inner.innerHTML = str;
+		reSetPosition()
+	}
+
+	function reSetPosition(){
+        
+		let inner_items = document.getElementById('inner').getElementsByClassName('inner-item');
+		for(let i = 0; i<inner_items.length; i++){
+			let node = inner_items[i];
+			let rect = node.getBoundingClientRect();
+			posiont_list[+node.id].height = rect.height;	
+		}
+		if(inner_items.length>0){
+			for(let k = +inner_items[0].id; k<posiont_list.length; k++){
+				let item =posiont_list[k];
+				item.top = k==0 ? 0: posiont_list[k-1].bottom;
+				item.bottom = k==0 ? item.height:(item.top + item.height);	
+			}	
+		}
+
+		let height = posiont_list[posiont_list.length-1].bottom
+		inner_scroll.style = `height: ${height}px`;
+
+		//获取当前的偏移量
+		let startOffset = 0
+		if(bengin_num >= 1){
+			startOffset = posiont_list[bengin_num - 1].bottom
+		}else{
+			startOffset = 0;
+		}
+		inner.style = `transform: translate3d(0px, ${startOffset}px, 0px);`
+	}
+
+
+
+
+
+
+
+
+
+</script>
+</html>
