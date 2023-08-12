@@ -41,16 +41,16 @@ export default {
         return
       }
       let parentIdArr = parentId.split('-');
-      parentIdArr.pop()
+      parentIdArr.pop();
       while(parentIdArr.length) {
-        let parent = findParent(this.treeNodeList, parentIdArr.slice(0))
+        let parent = findParent(this.treeNodeList, parentIdArr.slice(0));
         if (checked == true) {
-          parent.checked = true;
+          // parent.checked = ntrue;
           let flag = true;
           for (let i = 0;i < (parent.children||[]).length; i++) {
             if (parent.children[i].checked==false){
-              flag = false
-              break
+              flag = false;
+              break;
             } 
           }
           parent.checked = flag;
@@ -60,7 +60,7 @@ export default {
           for (let i = 0;i < (parent.children||[]).length; i++) {
             if (parent.children[i].checked==true || parent.children[i].isIndeterminate==true){
               flag = true;
-              break
+              break;
             } 
           }
           parent.checked = false;

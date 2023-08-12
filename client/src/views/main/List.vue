@@ -9,6 +9,7 @@
           {{data}}
        </template>
      </Tabel>
+     <img src="../../assets/logo.png" alt="">
   </div>
 </template>
 
@@ -36,6 +37,49 @@ export default {
         ]
       };
     },
+    async created(){
+      let size = await this.$axios.get('/api/user/size')
+      size = size.data
+      const downloadRange = (start, end)=>{
+        return this.$axios.post('/api/user',{},{
+          responseType: 'blob',
+          headers: { 
+            'range':`bytes=${start}-${end}`,
+            'Content-Type': 'application/octet-stream'
+          },
+        }).then((data)=>{
+          return {
+            data,
+            range:`${start}-${end}`
+          }
+        })
+      }
+      let chunkSize = 1024*500
+      let len = parseInt(size/chunkSize);
+      let arr = [];
+      for(let i=0; i<len; i++){
+        let start = i*chunkSize;
+        let end = i==len-1 ? size: (i+1)*chunkSize-1;
+        arr.push(downloadRange(start,end))
+      }
+     Promise.all(arr).then(data=>{
+        data = data.map(item=>item.data)
+        let blob = new Blob(data,{type: 'text/xml'})
+        let fileName = 'cc.zip';
+
+        //下载
+        let URL = window.URL || window.webkitURL
+        let objectUrl = URL.createObjectURL(blob);
+        let a = document.createElement('a')
+        a.href = objectUrl
+        a.download = fileName
+        document.body.appendChild(a)
+        a.click()
+        a.remove();
+        
+      })
+      
+    }
 };
 </script>
 
@@ -43,6 +87,7 @@ export default {
 .list {
   width: 100%;
   margin: 0 auto;
+
 }
 
 </style>

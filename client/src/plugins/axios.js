@@ -29,15 +29,19 @@ _axios.interceptors.request.use(
     return config;
 
   },
-  error => Promise.reject(error),
+  error => Promise.reject(error)
 );
+
+_axios.interceptors.request.use((config)=>{
+  return config;
+},null)
 
 // 响应拦截器，可以做集中处理错误code
 _axios.interceptors.response.use(
   function (response) {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
-    return response;
+    return response.data;
   },
   error => {
     if(error.code == 'ERR_CANCELED') {

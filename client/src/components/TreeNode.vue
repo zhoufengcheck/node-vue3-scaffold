@@ -55,7 +55,7 @@ export default {
       if(data.checked == true) {
         data.isIndeterminate = false
       }
-      Bus.$emit('changeParent',data.parentId,data.checked)
+      Bus.$emit('changeParent',data.parentId, data.checked)
       
     }
   } 

@@ -1,31 +1,31 @@
 <script setup>  
-  let a = require('./utils.js')
-  import {num} from'./utils2.js';
-  num = 10
-  setTimeout(()=>{
-    console.log(num)
-  },1000)
+  // let a = require('./utils.js')
+  // import {num} from'./utils2.js';
+  // num = 10
+  // setTimeout(()=>{
+  //   console.log(num)
+  // },1000)
 
 
 
 
 
-  import {reactive, ref,computed,watchEffect} from 'vue';
-  import usePage from './usePage.js'
-  let name = ref('zhoufeng');
-  function queryList(){
-    console.log(111)
-  }
-  let {currentPage,pageSize,total,pageSizeChange,currentPageChange} = usePage(queryList)
-  pageSizeChange(2)
+  // import {reactive, ref,computed,watchEffect} from 'vue';
+  // import usePage from './usePage.js'
+  // let name = ref('zhoufeng');
+  // function queryList(){
+  //   console.log(111)
+  // }
+  // let {currentPage,pageSize,total,pageSizeChange,currentPageChange} = usePage(queryList)
+  // pageSizeChange(2)
  
 
 </script>
 <template>
   <div class="detail">
-    detail page
+    <!-- detail page
     {{currentPage}},{{pageSize}}
-    {{name}}
+    {{name}} -->
   </div>
 </template>
 <style lang="scss" scoped>

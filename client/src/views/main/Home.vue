@@ -3,10 +3,12 @@
     Home <span id="name">{{name}}</span>
     <input type="text" v-model="name">
 
-    <Tree :treeNodeList="treeList" class="red"></Tree>
+    <!-- <Tree :treeNodeList="treeList" class="red"></Tree> -->
     <div class="outer">
       <div class="inner"></div>
     </div>
+    <caster></caster>
+
   </div>
   
 </template>
@@ -33,6 +35,7 @@ function dealTreeList(treeList,parentId='') {
 }
 
 import Tree from '../../components/Tree.vue'
+import Caster from '../../components/Caster.vue'
 import { computed } from 'vue';
 import {mapState} from 'vuex';
 export default {
@@ -97,7 +100,8 @@ export default {
     ...mapState('home', ['count'])
   },
   components: {
-    Tree
+    Tree,
+    Caster
   },
   provide() {
     return {
@@ -130,9 +134,9 @@ export default {
 
 <style lang="scss" scoped>
   .home {
-    ::v-deep .tree-node {
-      color: red;
-    }
+    // ::v-deep .tree-node {
+    //   color: red;
+    // }
     .outer {
       height: 400px;
       width: 400px;

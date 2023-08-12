@@ -1,6 +1,6 @@
 import {createRouter,createWebHashHistory} from 'vue-router';
 const List = ()=>import('../../views/main/List.vue');
-const Detail = ()=>import('../../views/main/Detail.vue')
+// const DetailCom = ()=>import('../../views/main/Detail.vue')
 const Home = ()=>import('../../views/main/Home.vue')
 const routes = [
     { 
@@ -9,7 +9,7 @@ const routes = [
             keepAlive:true
         }
     },
-    { path: '/detail', component: Detail },
+    // { path: '/detail', component: DetailCom },
     { path: '/list', component: List },
 ]
 const router = createRouter({
